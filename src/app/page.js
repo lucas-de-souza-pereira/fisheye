@@ -1,11 +1,11 @@
-import Image from "next/image";
 
 
 export default function Home() {
-  
+
   return (
 
-<div>
-    <p>toto</p>
-</div>
-  )}
+    <div>
+      <p>toto</p>
+    </div>
+  )
+}

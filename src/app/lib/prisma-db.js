@@ -1,8 +1,24 @@
-import { PrismaClient } from "@/generated/prisma/client"
+import { PrismaClient } from "../../../generated/prisma/client.ts"
+import path from 'path'
 
 const globalForPrisma = globalThis;
-const prisma = globalForPrisma.__prismaClient || new PrismaClient();
-if (!globalForPrisma.__prismaClient) globalForPrisma.__prismaClient = prisma;
+
+const prismaClientSingleton = () => {
+  let datasourceUrl = undefined;
+  if (process.env.DATABASE_URL && process.env.DATABASE_URL.startsWith('file:.')) {
+    const relativePath = process.env.DATABASE_URL.replace('file:', '');
+    datasourceUrl = 'file:' + path.join(process.cwd(), relativePath);
+  }
+
+  return new PrismaClient({
+    datasources: datasourceUrl ? { db: { url: datasourceUrl } } : undefined
+  });
+};
+
+const prisma = globalForPrisma.prisma ?? prismaClientSingleton();
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
+
 
 export const getAllPhotographers = () => prisma.photographer.findMany();
 

@@ -5,11 +5,13 @@ export default function Photographer({ name, city, country, tagline, price, port
     return (
         <article className="flex flex-col items-center w-[300px]">
             <Link href={`/photographer/${name}`} className="flex flex-col items-center">
-                <div className="h-[200px] w-[200px] relative overflow-hidden rounded-full">
+                <div className="h-[200px] w-[200px] relative overflow-hidden rounded-full shadow-lg ">
                     <Image src={`/assets/${portrait}`}
                         alt={`Portrait de ${name}`}
                         fill
-                        className="object-cover " />
+                        priority={true}
+                        sizes="400px"
+                        className="object-cover scale-110 transform-gpu" />
                 </div>
                 <h3 className="text-4xl font-normal text-secondary align-center mt-5">{name}</h3>
             </Link>

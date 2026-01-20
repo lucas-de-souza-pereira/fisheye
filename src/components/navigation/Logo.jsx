@@ -1,8 +1,9 @@
+import Link from "next/link";
 
 export default function Logo() {
     return (
-        <div className="">
-            <svg width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <Link href="/" aria-label="Fisheye Home page" className="focus" >
+            <svg aria-hidden="true" width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_120_483)">
                     <path d="M24.7206 0.911377V6.51034H6.31164V17.578H21.4333V22.9166H6.31164V39.1926H0V0.911377H24.7206Z" fill="#911C1C" />
                     <path d="M34.5826 1.04167C35.2401 1.69271 35.6346 2.60417 35.6346 3.64583C35.6346 4.6875 35.2401 5.46875 34.5826 6.11979C33.9252 6.77083 33.0047 7.16146 31.9528 7.16146C30.9008 7.16146 30.1119 6.77083 29.3229 6.11979C28.6655 5.46875 28.271 4.55729 28.271 3.64583C28.271 2.60417 28.6655 1.82292 29.3229 1.04167C29.9804 0.390625 30.9008 0 31.9528 0C33.0047 0 33.7937 0.390625 34.5826 1.04167ZM34.8456 11.1979V39.1927H28.9285V11.1979H34.8456Z" fill="#911C1C" />
@@ -18,6 +19,6 @@ export default function Logo() {
                     </clipPath>
                 </defs>
             </svg>
-        </div>
+        </Link>
     )
 }

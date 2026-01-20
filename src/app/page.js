@@ -7,7 +7,7 @@ export default async function Home() {
   const photographers = await getAllPhotographers()
 
   return (
-    <div className="max-w-[1440px] mx-auto">
+    <>
       <header className="flex justify-between mx-25 my-10.5 items-center" role="banner">
         <Logo />
         <h1 className="text-4xl font-normal text-primary leading-none">Nos photographes</h1>
@@ -23,6 +23,6 @@ export default async function Home() {
           </div>
         </section>
       </main>
-    </div>
+    </>
   )
 }

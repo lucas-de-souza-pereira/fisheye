@@ -1,10 +1,10 @@
 import Image from "next/image"
 import Link from "next/link"
 
-export default function Photographer({ name, city, country, tagline, price, portrait }) {
+export default function Photographer({ id, name, city, country, tagline, price, portrait }) {
     return (
         <article className="flex flex-col items-center w-[300px]">
-            <Link href={`/photographer/${name}`} className="flex flex-col items-center">
+            <Link href={`/photographer/${id}`} className="flex flex-col items-center">
                 <div className="h-[200px] w-[200px] relative overflow-hidden rounded-full shadow-lg ">
                     <Image src={`/assets/${portrait}`}
                         alt={`Portrait de ${name}`}

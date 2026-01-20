@@ -2,6 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 
 export default function Photographer({ id, name, city, country, tagline, price, portrait }) {
+
     return (
         <article className="flex flex-col items-center w-[300px]">
             <Link href={`/photographer/${id}`} className="flex flex-col items-center">

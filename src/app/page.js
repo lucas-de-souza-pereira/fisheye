@@ -1,6 +1,8 @@
+
+import { getAllPhotographers } from "@/app/lib/prisma-db";
+
 import Logo from "@/components/navigation/Logo";
 import Photographer from "@/components/photographer/Photographer";
-import { getAllPhotographers } from "@/app/lib/prisma-db";
 
 export default async function Home() {
 

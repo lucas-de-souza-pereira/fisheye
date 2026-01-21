@@ -12,11 +12,14 @@ const filterOptions = [
 
 export default function PhotographerClient({ media }) {
     const [sort, setSort] = useState("popularity")
+
+
+
     return (
         <div>
             <h1>Photographer Client</h1>
             <Filter label="Popularité" filterOptions={filterOptions} />
-            <div>
+            <div className="flex flex-wrap gap-x-23.75 gap-y-5 mt-13">
                 {media.map((media) => (
                     <GalleryItem key={media.id} media={media} />
                 ))}

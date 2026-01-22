@@ -2,11 +2,8 @@
 
 import Image from "next/image"
 import { ASSETS_PATH } from "@/utils/config"
-import Lightbox from "./Lightbox"
-import { useState } from "react"
 
-export default function GalleryItem({ media }) {
-    const [isOpen, setIsOpen] = useState(false)
+export default function GalleryItem({ media, onOpen }) {
 
     const { title, image, video, likes } = media
     const isVideo = !!video
@@ -35,7 +32,7 @@ export default function GalleryItem({ media }) {
                 <button
                     type="button"
                     className="w-full h-full block cursor-pointer"
-                    onClick={() => setIsOpen(true)}
+                    onClick={onOpen}
                     aria-label={""}
                 >
                     {isVideo ? (
@@ -45,7 +42,6 @@ export default function GalleryItem({ media }) {
                     )}
                 </button>
             </div>
-            <Lightbox isOpen={isOpen} onClose={() => setIsOpen(false)} image={image} video={video} title={title} />
             <div className="flex-1 flex justify-between items-center text-primary text-2xl">
                 <p className="font-normal">{title}</p>
                 <div className="flex gap-x-1 items-center">

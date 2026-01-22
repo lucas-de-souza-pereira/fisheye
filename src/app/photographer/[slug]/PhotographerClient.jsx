@@ -17,7 +17,7 @@ export default function PhotographerClient({ media }) {
 
     return (
         <div>
-            <h1>Photographer Client</h1>
+
             <Filter label="Popularité" filterOptions={filterOptions} />
             <div className="flex flex-wrap gap-x-23.75 gap-y-5 mt-13">
                 {media.map((media) => (

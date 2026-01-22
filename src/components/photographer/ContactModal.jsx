@@ -8,12 +8,11 @@ export default function ContactModal({ isOpen, onClose, name }) {
         if (!isOpen) return
 
         const handleKeyDown = (e) => {
-            // Fermeture avec Echap
+
             if (e.key === "Escape") {
                 onClose()
             }
 
-            // Focus Trap (Piège à focus)
             if (e.key === "Tab") {
                 const focusableElements = modalRef.current.querySelectorAll(
                     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -22,13 +21,11 @@ export default function ContactModal({ isOpen, onClose, name }) {
                 const lastElement = focusableElements[focusableElements.length - 1]
 
                 if (e.shiftKey) {
-                    // Shift + Tab : Si on est sur le premier, on va au dernier
                     if (document.activeElement === firstElement) {
                         e.preventDefault()
                         lastElement.focus()
                     }
                 } else {
-                    // Tab : Si on est sur le dernier, on va au premier
                     if (document.activeElement === lastElement) {
                         e.preventDefault()
                         firstElement.focus()
@@ -39,7 +36,6 @@ export default function ContactModal({ isOpen, onClose, name }) {
 
         document.addEventListener("keydown", handleKeyDown)
 
-        // Focus sur le premier élément (la croix de fermeture) à l'ouverture
         const focusableElements = modalRef.current.querySelectorAll('button, input, textarea')
         if (focusableElements.length > 0) {
             focusableElements[0].focus()
@@ -59,28 +55,40 @@ export default function ContactModal({ isOpen, onClose, name }) {
                 ref={modalRef}
                 className="relative bg-[#DB8876] px-8.75 pt-5 pb-9.5 rounded-[5px] shadow-lg z-10 w-[669px]"
                 open={isOpen}
+                aria-modal="true"
+                aria-labelledby="modal-title"
             >
                 <div className="flex justify-between items-start mb-5 relative">
-                    <h1 className="text-[64px] font-normal text-black leading-none">
+                    <h1 id="modal-title" className="text-[64px] font-normal text-black leading-none">
                         Contactez-moi<br />
                         {name}
                     </h1>
-                    <button onClick={onClose} className="absolute top-4 right-0">
+                    <button onClick={onClose} className="absolute top-4 right-0" aria-label="Fermer le formulaire de contact">
                         <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M42 4.23L37.77 0L21 16.77L4.23 0L0 4.23L16.77 21L0 37.77L4.23 42L21 25.23L37.77 42L42 37.77L25.23 21L42 4.23Z" fill="white" />
                         </svg>
                     </button>
                 </div>
-                <form action="" className="flex flex-col gap-y-1">
-                    <label htmlFor="firstName" className="text-[#312E2E] font-medium text-4xl">Prénom</label>
-                    <input type="text" id="firstName" name="firstName" required className="bg-white h-17 rounded-[5px] px-2.5 py-5.25" />
-                    <label htmlFor="lastName" className="text-[#312E2E] font-medium text-4xl">Nom</label>
-                    <input type="text" id="lastName" name="lastName" required className="bg-white h-17 rounded-[5px] px-2.5 py-5.25" />
-                    <label htmlFor="email" className="text-[#312E2E] font-medium text-4xl">Email</label>
-                    <input type="email" id="email" name="email" required className="bg-white h-17 rounded-[5px] px-2.5 py-5.25" />
-                    <label htmlFor="message" className="text-[#312E2E] font-medium text-4xl">Message</label>
-                    <textarea id="message" name="message" required className="bg-white h-42.5 rounded-[5px] px-2.5 py-5.25 resize-none"></textarea>
-                    <button type="submit" className="bg-primary text-white text-lg font-bold rounded-[5px]  px-12.5 py-5.75 text-center align-middle mt-5.5 w-42.5 cursor-pointer">Envoyer</button>
+                <form action="" onSubmit={(e) => {
+                    e.preventDefault()
+                    const formData = new FormData(e.target)
+                    const data = Object.fromEntries(formData)
+                    console.log("Formulaire envoyé :", data)
+                    onClose()
+                }} className="flex flex-col gap-y-1">
+                    <label id="label-firstname" htmlFor="firstName" className="text-[#312E2E] font-medium text-4xl">Prénom</label>
+                    <input aria-labelledby="label-firstname" type="text" id="firstName" name="firstName" required className="bg-white h-17 rounded-[5px] px-2.5 py-5.25" />
+
+                    <label id="label-lastname" htmlFor="lastName" className="text-[#312E2E] font-medium text-4xl">Nom</label>
+                    <input aria-labelledby="label-lastname" type="text" id="lastName" name="lastName" required className="bg-white h-17 rounded-[5px] px-2.5 py-5.25" />
+
+                    <label id="label-email" htmlFor="email" className="text-[#312E2E] font-medium text-4xl">Email</label>
+                    <input aria-labelledby="label-email" type="email" id="email" name="email" required className="bg-white h-17 rounded-[5px] px-2.5 py-5.25" />
+
+                    <label id="label-message" htmlFor="message" className="text-[#312E2E] font-medium text-4xl">Message</label>
+                    <textarea aria-labelledby="label-message" id="message" name="message" required className="bg-white h-42.5 rounded-[5px] px-2.5 py-5.25 resize-none"></textarea>
+
+                    <button aria-label="Envoyer" type="submit" className="bg-primary text-white text-lg font-bold rounded-[5px]  px-12.5 py-5.75 text-center align-middle mt-5.5 w-42.5 cursor-pointer">Envoyer</button>
                 </form>
             </dialog>
         </div>

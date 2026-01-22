@@ -1,13 +1,18 @@
+"use client"
+
 import Image from "next/image"
 import { ASSETS_PATH } from "@/utils/config"
+import Lightbox from "./Lightbox"
+import { useState } from "react"
 
 export default function GalleryItem({ media }) {
+    const [isOpen, setIsOpen] = useState(false)
 
     const { title, image, video, likes } = media
     const isVideo = !!video
-    const isContent = !!video & !!image
+    const notContent = !!video & !!image
 
-    if (isContent) return (
+    if (notContent) return (
         <article className="flex flex-col h-[351px]  w-[350px]">
             <div className="relative h-[300px] w-[350px] overflow-hidden rounded-[5px]">
                 <span className="bg-grey w-full h-full"></span>
@@ -27,12 +32,20 @@ export default function GalleryItem({ media }) {
     return (
         <article className="flex flex-col h-[351px]  w-[350px]">
             <div className="relative h-[300px] w-[350px] overflow-hidden rounded-[5px]">
-                {isVideo ? (
-                    <video src={ASSETS_PATH + video} className="h-full w-full object-cover" muted />
-                ) : (
-                    <Image src={ASSETS_PATH + image} alt={title} fill className="object-cover " sizes="1200px" />
-                )}
+                <button
+                    type="button"
+                    className="w-full h-full block cursor-pointer"
+                    onClick={() => setIsOpen(true)}
+                    aria-label={""}
+                >
+                    {isVideo ? (
+                        <video src={ASSETS_PATH + video} className="h-full w-full object-cover" muted />
+                    ) : (
+                        <Image src={ASSETS_PATH + image} alt={title} fill className="object-cover" sizes="1200px" />
+                    )}
+                </button>
             </div>
+            <Lightbox isOpen={isOpen} onClose={() => setIsOpen(false)} image={image} video={video} title={title} />
             <div className="flex-1 flex justify-between items-center text-primary text-2xl">
                 <p className="font-normal">{title}</p>
                 <div className="flex gap-x-1 items-center">

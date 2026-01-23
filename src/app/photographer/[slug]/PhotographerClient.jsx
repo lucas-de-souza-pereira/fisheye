@@ -12,37 +12,32 @@ const filterOptions = [
 ]
 
 export default function PhotographerClient({ media, sumLikes, price }) {
-    const [sort, setSort] = useState("date")
-    const [isOpen, setIsOpen] = useState(false)
-    const [index, setIndex] = useState(0)
+    const [sortValue, setSortValue] = useState("likes")
+    const [LightboxIsOpen, setLightboxIsOpen] = useState(false)
+    const [indexMedia, setIndexMedia] = useState(0)
     const [totalLikes, setTotalLikes] = useState(sumLikes)
 
     const sortMedia = (s) => {
+        setSortValue(s)
         if (s === "title") return media.sort((a, b) => a[s].localeCompare(b[s]))
         if (s === "likes") return media.sort((a, b) => b[s] - a[s])
         if (s === "date") return media.sort((a, b) => new Date(b[s]) - new Date(a[s]))
-
-
     }
-
-    sortMedia(sort)
-    console.log(media)
-
 
     return (
         <div>
 
-            <Filter label="Popularité" filterOptions={filterOptions} />
+            <Filter sortValue={sortValue} onSortChange={sortMedia} filterOptions={filterOptions} />
             <div className="flex flex-wrap gap-x-23.75 gap-y-5 mt-13">
                 {media.map((media, index) => (
                     <GalleryItem key={media.id} media={media} onOpen={() => {
-                        setIndex(index)
-                        setIsOpen(true)
+                        setIndexMedia(index)
+                        setLightboxIsOpen(true)
                     }}
                         onLike={() => setTotalLikes(totalLikes + 1)} />
                 ))}
             </div>
-            <Lightbox isOpen={isOpen} onClose={() => setIsOpen(false)} media={media} index={index} setIndex={setIndex} />
+            <Lightbox isOpen={LightboxIsOpen} onClose={() => setLightboxIsOpen(false)} media={media} index={indexMedia} setIndex={setIndexMedia} />
 
             <aside className="fixed bottom-0 right-9 flex items-center bg-[#DB8876] rounded-t-[5px] text-black text-2xl font-medium px-8 py-5 gap-15 z-50">
                 <div className="flex items-center gap-2">

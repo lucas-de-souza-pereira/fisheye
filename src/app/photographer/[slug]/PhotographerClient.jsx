@@ -26,9 +26,11 @@ export default function PhotographerClient({ media, sumLikes, price }) {
 
     return (
         <div>
-
-            <Filter sortValue={sortValue} onSortChange={sortMedia} filterOptions={filterOptions} />
-            <div className="flex flex-wrap gap-x-23.75 gap-y-5 mt-13">
+            <div className="flex gap-x-6.25 mt-2.25">
+                <span className="text-black text-lg font-bold pt-2.75">Trier par : </span>
+                <Filter sortValue={sortValue} onSortChange={sortMedia} filterOptions={filterOptions} />
+            </div>
+            <div className="flex flex-wrap gap-x-23.75 gap-y-5 mt-6">
                 {media.map((media, index) => (
                     <GalleryItem key={media.id} media={media} onOpen={() => {
                         setIndexMedia(index)

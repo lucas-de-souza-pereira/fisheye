@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Logo() {
     return (
-        <Link href="/" aria-label="Fisheye Home page" className="focus" >
+        <Link href="/" aria-label="Fisheye, page d'accueil" className="focus" >
             <svg aria-hidden="true" width="200" height="50" viewBox="0 0 200 50" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g clipPath="url(#clip0_120_483)">
                     <path d="M24.7206 0.911377V6.51034H6.31164V17.578H21.4333V22.9166H6.31164V39.1926H0V0.911377H24.7206Z" fill="#911C1C" />

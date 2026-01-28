@@ -31,18 +31,20 @@ export default function GalleryItem({ media, onOpen, onLike }) {
 
     return (
         <article className="flex flex-col h-[351px]  w-[350px]">
-            <div className="relative h-[300px] w-[350px] overflow-hidden rounded-[5px]">
+            <div className="relative h-[300px] w-[350px]">
                 <button
                     type="button"
-                    className="w-full h-full block cursor-pointer"
+                    className="w-full h-full"
                     onClick={onOpen}
-                    aria-label={""}
+                    aria-label={title + ", vue rapprochée"}
                 >
-                    {isVideo ? (
-                        <video src={ASSETS_PATH + video} className="h-full w-full object-cover" muted />
-                    ) : (
-                        <Image src={ASSETS_PATH + image} alt={title} fill className="object-cover" sizes="1200px" />
-                    )}
+                    <div className="w-full h-full cursor-pointer    overflow-hidden  rounded-[5px] relative">
+                        {isVideo ? (
+                            <video src={ASSETS_PATH + video} className="h-full w-full object-cover" muted />
+                        ) : (
+                            <Image src={ASSETS_PATH + image} alt="" fill className="object-cover" sizes="1200px" />
+                        )}
+                    </div>
                 </button>
             </div>
             <div className="flex-1 flex justify-between items-center text-primary text-2xl">
@@ -50,11 +52,14 @@ export default function GalleryItem({ media, onOpen, onLike }) {
                 <div className="flex gap-x-1 items-center">
                     <p className="font-medium">{likesCount}</p>
                     {/* like */}
-                    <button className="cursor-pointer" onClick={() => {
-                        setLikesCount(likesCount + 1)
-                        updateNumberOfLikes(id, likesCount + 1)
-                        onLike()
-                    }}>
+                    <button
+                        className="cursor-pointer" onClick={() => {
+                            setLikesCount(likesCount + 1)
+                            updateNumberOfLikes(id, likesCount + 1)
+                            onLike()
+                        }}
+                        aria-label={`J'aime ${title}`}
+                    >
                         <svg width="20" height="19" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M10 18.35L8.55 17.03C3.4 12.36 0 9.28 0 5.5C0 2.42 2.42 0 5.5 0C7.24 0 8.91 0.81 10 2.09C11.09 0.81 12.76 0 14.5 0C17.58 0 20 2.42 20 5.5C20 9.28 16.6 12.36 11.45 17.04L10 18.35Z" fill="#911C1C" />
                         </svg>

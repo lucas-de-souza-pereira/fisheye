@@ -17,7 +17,6 @@ export default async function Home() {
 
       <main className="w-11/12 mx-auto my-27.5">
         <section className="w-full" >
-          <h2 className="sr-only">Listes des photographes</h2>
           <div className="flex flex-wrap justify-around gap-y-20 gap-x-40">
             {photographers.map((photographer) => (
               <Photographer key={photographer.id} {...photographer} />

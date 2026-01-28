@@ -1,6 +1,6 @@
 
 import { getPhotographer, getAllMediasForPhotographer } from "@/app/lib/prisma-db"
-
+import { notFound } from "next/navigation"
 
 import Logo from "@/components/navigation/Logo"
 import PhotographerProfile from "@/components/photographer/PhotographerProfile"
@@ -17,8 +17,7 @@ export default async function PhotographerPage({ params }) {
     const media = await getAllMediasForPhotographer(id)
 
     if (!photographer) {
-        // TODO: Redirect to 404 page
-        return <div>Photographer not found</div>
+        return notFound()
     }
 
     const totalLikes = media.reduce((total, media) => total + media.likes, 0)

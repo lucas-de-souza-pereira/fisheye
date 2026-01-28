@@ -128,6 +128,7 @@ export default function Lightbox({ isOpen, onClose, media, index, setIndex }) {
                                     alt=""
                                     fill
                                     className="object-cover blur-xl scale-110 opacity-50 -z-10"
+                                    sizes="(max-width: 1050px) 100vw, 1050px"
                                 />
                                 {/* Image principale */}
                                 <Image

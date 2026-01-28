@@ -5,7 +5,7 @@ import { ASSETS_PATH } from "@/utils/config"
 import { useState } from "react"
 import { updateNumberOfLikes } from "@/app/lib/actions"
 
-export default function GalleryItem({ media, onOpen, onLike }) {
+export default function GalleryItem({ media, onOpen, onLike, priority = false }) {
     const [likesCount, setLikesCount] = useState(media.likes)
 
     const { id, title, image, video } = media
@@ -42,7 +42,7 @@ export default function GalleryItem({ media, onOpen, onLike }) {
                         {isVideo ? (
                             <video src={ASSETS_PATH + video} className="h-full w-full object-cover" muted />
                         ) : (
-                            <Image src={ASSETS_PATH + image} alt="" fill className="object-cover" sizes="1200px" />
+                            <Image src={ASSETS_PATH + image} alt="" fill className="object-cover" sizes="1200px" priority={priority} />
                         )}
                     </div>
                 </button>

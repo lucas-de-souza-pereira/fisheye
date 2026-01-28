@@ -1,11 +1,29 @@
 
+import { getAllPhotographers } from "@/app/lib/prisma-db";
 
-export default function Home() {
+import Logo from "@/components/navigation/Logo";
+import Photographer from "@/components/photographer/Photographer";
+
+export default async function Home() {
+
+  const photographers = await getAllPhotographers()
 
   return (
+    <>
+      <header className="flex justify-between mx-25 my-10.5 items-center" role="banner">
+        <Logo />
+        <h1 className="text-4xl font-normal text-primary leading-none">Nos photographes</h1>
+      </header>
 
-    <div>
-      <p>toto</p>
-    </div>
+      <main className="w-11/12 mx-auto my-27.5">
+        <section className="w-full" >
+          <div className="flex flex-wrap justify-around gap-y-20 gap-x-40">
+            {photographers.map((photographer) => (
+              <Photographer key={photographer.id} {...photographer} />
+            ))}
+          </div>
+        </section>
+      </main>
+    </>
   )
 }

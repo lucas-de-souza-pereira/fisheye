@@ -6,7 +6,7 @@ Bienvenue sur le dépôt du projet **Fisheye**. Ce projet est une application we
 
 ## 📋 À propos du projet
 
-Ce site a été conçu dans le cadre d'un parcours de formation (OpenClassrooms - Projet 9). L'objectif est de fournir une interface accessible, performante et esthétique pour naviguer parmi les artistes.
+Ce site a été conçu dans le cadre d'un parcours de formation OpenClassrooms. L'objectif est de fournir une interface accessible, performante et esthétique pour naviguer parmi les artistes.
 
 ### 🛠️ Technologies utilisées
 

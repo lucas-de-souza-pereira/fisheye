@@ -50,7 +50,7 @@ export default function Filter({ sortValue, filterOptions, onSortChange }) {
                                 aria-selected={sortValue === options.value}
                                 tabIndex="0"
                                 key={options.value}
-                                className="w-full border-t border-white py-3.5 cursor-pointer"
+                                className="w-full text-left border-t border-white py-3.5 cursor-pointer"
                                 onClick={() => {
                                     onSortChange(otherOptions[index].value)
                                     setIsOpen(false)

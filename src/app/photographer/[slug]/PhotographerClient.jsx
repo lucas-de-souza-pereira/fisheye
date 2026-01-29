@@ -37,7 +37,7 @@ export default function PhotographerClient({ media, sumLikes, price }) {
                         setLightboxIsOpen(true)
                     }}
                         onLike={() => setTotalLikes(totalLikes + 1)}
-                        priority={index === 0}
+                        priority={index < 4}
                     />
                 ))}
             </div>

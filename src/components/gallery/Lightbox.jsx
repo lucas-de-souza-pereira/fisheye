@@ -8,60 +8,40 @@ export default function Lightbox({ isOpen, onClose, media, index, setIndex }) {
     const modalRef = useRef(null)
 
     useEffect(() => {
+        if (isOpen && modalRef.current) {
+            const firstBtn = modalRef.current.querySelector('button')
+            if (firstBtn) firstBtn.focus()
+        }
+    }, [isOpen])
 
-        if (!isOpen) return
+    const handleKeyDown = (e) => {
+        if (e.key === "Escape") onClose()
+        if (e.key === "ArrowLeft") handlePrev()
+        if (e.key === "ArrowRight") handleNext()
 
-        const handleKeyDown = (e) => {
+        if (e.key === "Tab") {
+            if (!modalRef.current) return
 
-            if (e.key === "Escape") {
-                onClose()
-            }
+            const focusableElements = modalRef.current.querySelectorAll('button')
 
-            if (e.key === "Tab") {
-                const focusableElements = modalRef.current.querySelectorAll(
-                    'button, [href], input, select, textearea, [tabindex]:not([tabindex="-1"])'
-                )
+            if (focusableElements === 0) return
 
-                const firstElement = focusableElements[0]
-                const lastElement = focusableElements[focusableElements.length - 1]
+            const firstElement = focusableElements[0]
+            const lastElement = focusableElements[focusableElements.length - 1]
 
-                if (e.shiftKey) {
-                    if (document.activeElement === firstElement) {
-                        e.preventDefault()
-                        lastElement.focus()
-                    }
-                } else {
-                    if (document.activeElement === lastElement) {
-                        e.preventDefault()
-                        firstElement.focus()
-                    }
+            if (e.shiftKey) {
+                if (document.activeElement === firstElement) {
+                    e.preventDefault()
+                    lastElement.focus()
+                }
+            } else {
+                if (document.activeElement === lastElement) {
+                    e.preventDefault()
+                    firstElement.focus()
                 }
             }
-
-            if (e.key === "ArrowLeft") {
-                handlePrev()
-            }
-
-            if (e.key === "ArrowRight") {
-                handleNext()
-            }
         }
-
-        document.addEventListener("keydown", handleKeyDown)
-
-        const focusableElements = modalRef.current.querySelectorAll('button')
-        if (focusableElements.length > 0) {
-            focusableElements[0].focus()
-        }
-
-        return () => {
-            document.removeEventListener("keydown", handleKeyDown)
-        }
-
-    }, [isOpen, onClose])
-
-
-    if (!isOpen) return
+    }
 
     const handleNext = () => {
         if (index == media.length - 1) return setIndex(0)
@@ -72,6 +52,7 @@ export default function Lightbox({ isOpen, onClose, media, index, setIndex }) {
         setIndex((i) => i - 1)
     }
 
+    if (!isOpen) return null
     const isVideo = !!media[index].video
 
     return (
@@ -80,6 +61,7 @@ export default function Lightbox({ isOpen, onClose, media, index, setIndex }) {
             <dialog
                 ref={modalRef}
                 className="relative z-10 w-[1240px] flex items-center justify-center gap-x-8.5 rounded-[5px] py-2"
+                onKeyDown={handleKeyDown}
                 open={isOpen}
                 aria-modal="true"
                 aria-label="Image en vue rapproché"
